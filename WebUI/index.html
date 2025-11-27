@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Network Scanner</title>
+</head>
+<body style="font-family: Arial; padding: 40px;">
+  <h2>Start Vulnerability Scan</h2>
+
+  <button id="scanBtn" style="padding: 10px 20px; font-size: 16px;">
+    Start Scan
+  </button>
+
+  <p id="status"></p>
+
+  <script>
+    document.getElementById("scanBtn").onclick = async () => {
+      document.getElementById("status").innerText = "Scan started...";
+
+      try {
+        const response = await fetch("/start-scan", { method: "POST" });
+
+        if (!response.ok) {
+          throw new Error("Scan failed");
+        }
+
+        // When the scan starts, redirect to result page
+        window.location.href = "/result.html";
+      } catch {
+        document.getElementById("status").innerText =
+          "Failed to start scan. Check backend.";
+      }
+    };
+  </script>
+</body>
+</html>

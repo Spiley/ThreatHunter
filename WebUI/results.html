@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Scan Summary</title>
+</head>
+<body style="font-family: Arial; padding: 40px;">
+  <h2>AI Summary of Vulnerabilities</h2>
+
+  <div id="summary" style="white-space: pre-wrap; margin-top: 20px;">
+    Loading summary...
+  </div>
+
+  <script>
+    async function loadSummary() {
+      try {
+        const response = await fetch("/summary");
+        const data = await response.text();
+
+        document.getElementById("summary").innerText = data;
+      } catch {
+        document.getElementById("summary").innerText =
+          "Failed to load summary.";
+      }
+    }
+
+    loadSummary();
+  </script>
+</body>
+</html>

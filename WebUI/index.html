@@ -1,17 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Network Scanner</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", Arial, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #ffffff;
+      width: 380px;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #1e1e1e;
+    }
+
+    #scanBtn {
+      background: #41af01;
+      border: none;
+      padding: 14px 24px;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      width: 100%;
+    }
+
+    #scanBtn:hover {
+      background: #00d80b;
+      transform: translateY(-1px);
+    }
+
+    #scanBtn:active {
+      transform: translateY(1px);
+    }
+
+    #status {
+      margin-top: 16px;
+      font-size: 15px;
+      color: #333;
+      min-height: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body style="font-family: Arial; padding: 40px;">
-  <h2>Start Vulnerability Scan</h2>
+<body>
 
-  <button id="scanBtn" style="padding: 10px 20px; font-size: 16px;">
-    Start Scan
-  </button>
+  <div class="card">
+    <h2>Start Vulnerability Scan</h2>
 
-  <p id="status"></p>
+    <button id="scanBtn">Start Scan</button>
+
+    <p id="status"></p>
+  </div>
 
   <script>
     document.getElementById("scanBtn").onclick = async () => {
@@ -24,7 +87,6 @@
           throw new Error("Scan failed");
         }
 
-        // When the scan starts, redirect to result page
         window.location.href = "/result.html";
       } catch {
         document.getElementById("status").innerText =
@@ -32,5 +94,6 @@
       }
     };
   </script>
+
 </body>
 </html>

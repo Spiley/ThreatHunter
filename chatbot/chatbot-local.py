@@ -78,7 +78,7 @@ def load_llama():
         llm = Llama(
             model_path=model_path,
             n_ctx=4096,      # Groot context window
-            n_threads=8,     # Pas dit aan naar je aantal CPU cores
+            n_threads=8,     # Pas dit aan naar je aantal CPU cores (sneller met meer cores)
             verbose=False
         )
 
@@ -112,7 +112,7 @@ def process_pdf(file):
     vs.build(chunks)
     return f"✅ Rapport verwerkt. {len(chunks)} fragmenten klaar voor analyse."
 
-with gr.Blocks(theme=gr.themes.Soft()) as demo:
+with gr.Blocks() as demo:
     gr.Markdown("OpenVAS PDF Chatbot")
     with gr.Row():
         pdf_file = gr.File(label="PDF Rapport")
@@ -124,4 +124,4 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     upload_btn.click(process_pdf, inputs=[pdf_file], outputs=[status])
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(server_name="0.0.0.0", server_port=7860, theme=gr.themes.Soft())

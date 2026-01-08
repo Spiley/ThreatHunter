@@ -78,9 +78,20 @@ def load_llama():
         llm = Llama(
             model_path=model_path,
             n_ctx=4096,      # Groot context window
-            n_threads=8,     # Pas dit aan naar je aantal CPU cores (sneller met meer cores)
+            n_threads=8,     # Pas dit aan naar je aantal CPU cores (sneller met meer cores) "voor toekomst klein script die cpu achterhaald van pc"
             verbose=False
         )
+
+# script om cores te achterhalen
+# def get_optimal_threads(reserve=1):
+#     """
+#     Bepaalt een veilig aantal threads voor CPU-gebaseerde LLMs.
+#     reserve = aantal cores dat je vrij laat voor het OS
+#     """
+#     cores = os.cpu_count() or 1
+#     return max(1, cores - reserve)
+
+# N_THREADS = get_optimal_threads()
 
 def generate_answer(message, history):
     global llm, vs
@@ -91,6 +102,8 @@ def generate_answer(message, history):
     context_text = "\n---\n".join(context_chunks)
 
     # Llama-3 instructie-template
+    # misschien even iets uitgebreidere instructies "versimpel het zodat een niet-expert het kan lezen"
+    # (bijv. “open poort” → “een digitaal deurtje dat vanaf internet bereikbaar is”).
     prompt = f"""<|start_header_id|>system<|end_header_id|>
 Je bent een cybersecurity expert. Gebruik de onderstaande tekst uit een OpenVAS rapport om de vraag te beantwoorden. 
 Antwoord kort, feitelijk en in het Nederlands. Als het niet in de tekst staat, zeg je dat je het niet weet.

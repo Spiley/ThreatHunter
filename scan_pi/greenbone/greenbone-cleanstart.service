@@ -1,0 +1,17 @@
+[Unit]
+Description=Greenbone clean start (compose down + up) after boot
+After=docker.service network-online.target
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/thpi/greenbone
+ExecStartPre=/bin/sleep 30
+ExecStart=/usr/bin/docker compose down
+ExecStart=/usr/bin/docker compose up -d
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

@@ -24,7 +24,7 @@ Wacht totdat alle services volledig zijn opgestart.
 
 Wanneer GVM is gestart, is de webinterface bereikbaar via:
 
-th-pi.local:9392
+<pi-ip>:9392
 
 
 Log in met de standaardgegevens:
